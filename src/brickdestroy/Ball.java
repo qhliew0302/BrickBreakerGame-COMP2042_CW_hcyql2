@@ -6,8 +6,9 @@ import java.awt.geom.RectangularShape;
 
 /**
  * Created by filippo on 04/09/16.
- *
+ * Refactored by Qian Hui on 4/12/2021.
  */
+
 abstract public class Ball {
 
     private Shape ballFace;
@@ -34,9 +35,9 @@ abstract public class Ball {
         setLeft(new Point2D.Double());
         setRight(new Point2D.Double());
 
+        // set the location of the ball (circumference: up, down, left, right)
         getUp().setLocation(center.getX(),center.getY()-(radiusB / 2));
         getDown().setLocation(center.getX(),center.getY()+(radiusB / 2));
-
         getLeft().setLocation(center.getX()-(radiusA /2),center.getY());
         getRight().setLocation(center.getX()+(radiusA /2),center.getY());
 
@@ -51,16 +52,20 @@ abstract public class Ball {
     protected abstract Shape makeBall(Point2D center,int radiusA,int radiusB);
 
     public void move(){
-        RectangularShape tmp = (RectangularShape) ballFace;
-        center.setLocation((center.getX() + speedX),(center.getY() + speedY));
-        double w = tmp.getWidth();
-        double h = tmp.getHeight();
 
-        tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
+        // create a temporary ballFace which converts the initial ballFace to a rectangular shape
+        RectangularShape tempBallFace = (RectangularShape) ballFace;
+        // the center of the ball will move according to the speed change
+        center.setLocation((center.getX() + speedX),(center.getY() + speedY));
+        double w = tempBallFace.getWidth();
+        double h = tempBallFace.getHeight();
+
+        // set a frame for temporary ballFace using the center of ball
+        tempBallFace.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
         setPoints(w,h);
 
 
-        ballFace = tmp;
+        ballFace = tempBallFace;
     }
 
     public void setSpeed(int x,int y){
