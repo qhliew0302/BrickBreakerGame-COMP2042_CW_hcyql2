@@ -17,7 +17,7 @@ public class Level {
     public static Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
+          multiple of lineCount smaller than brickCount
          */
         brickCnt -= brickCnt % lineCnt;
 
@@ -57,7 +57,7 @@ public class Level {
     public static Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
+          multiple of lineCount smaller than brickCount
          */
         brickCnt -= brickCnt % lineCnt;
 

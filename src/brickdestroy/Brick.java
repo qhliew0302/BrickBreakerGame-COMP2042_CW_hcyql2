@@ -100,11 +100,13 @@ abstract public class Brick  {
         return broken;
     }
 
+    // repair the brick by resetting the brick to not broken status, and resetting the brick's strength
     public void repair() {
         broken = false;
         strength = fullStrength;
     }
 
+    // after impact, strength decrease by 1, if strength decreases to 0, then broken is true
     public void impact(){
         strength--;
         broken = (strength == 0);

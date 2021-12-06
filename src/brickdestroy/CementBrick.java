@@ -23,11 +23,14 @@ public class CementBrick extends Brick {
         brickFace = super.getBrickFace();
     }
 
+    // make a rectangular brick
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
+    // if the brick is broken, no impact is set
+    // else make an impact and if the brick is not broken, then make a crack
     @Override
     public boolean setImpact(Point2D point, int dir) {
         if(super.isBroken())
@@ -47,6 +50,7 @@ public class CementBrick extends Brick {
         return brickFace;
     }
 
+    // update brick if the brick is not broken and draw a crack on it
     private void updateBrick(){
         if(!super.isBroken()){
             GeneralPath gp = crack.draw();
@@ -55,6 +59,7 @@ public class CementBrick extends Brick {
         }
     }
 
+    // repair the brick by removing the crack
     public void repair(){
         super.repair();
         crack.reset();

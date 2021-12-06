@@ -64,12 +64,14 @@ public class DebugPanel extends JPanel {
         this.setLayout(new GridLayout(2,2));
     }
 
+    // make button on the Debug Panel
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
+    // make slider on the Debug Panel to manipulate the speed of ball
     private JSlider makeSlider(int min, int max, ChangeListener e){
         JSlider out = new JSlider(min,max);
         out.setMajorTickSpacing(1);
