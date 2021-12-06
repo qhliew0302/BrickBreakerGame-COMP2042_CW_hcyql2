@@ -42,6 +42,7 @@ public class Crack{
         crack.reset();
     }
 
+    // make a crack on the brick by determining the position of the crack on the brick
     protected void makeCrack(Point2D point, int direction){
         Rectangle bounds = brick.getBrickFace().getBounds();
         Point impact = new Point((int)point.getX(),(int)point.getY());
@@ -81,6 +82,7 @@ public class Crack{
         }
     }
 
+    // draw the crack the brick
     protected void makeCrack(Point start, Point end){
 
         GeneralPath path = new GeneralPath();

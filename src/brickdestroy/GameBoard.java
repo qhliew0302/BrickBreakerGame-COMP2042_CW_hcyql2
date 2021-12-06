@@ -71,7 +71,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
+        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),new Point(300,430));
         level = new Level(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3, 6/2, wall);
 
         debugConsole = new DebugConsole(owner,wall,level,this);
@@ -162,6 +162,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    // draw Ball
     private void drawBall(Ball ball,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -176,6 +177,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    // draw Player
     private void drawPlayer(Player p,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -194,6 +196,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         drawPauseMenu(g2d);
     }
 
+    // show GameBoard
     private void obscureGameBoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
@@ -209,6 +212,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
+    // draw Pause Menu
     private void drawPauseMenu(Graphics2D g2d){
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();
