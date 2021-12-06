@@ -7,11 +7,10 @@ import java.util.Random;
 
 /**
  * Created by filippo on 04/09/16.
- *
+ * Refactored by Qian Hui on 2/12/2021.
  */
 abstract public class Brick  {
 
-    public static final int MIN_CRACK = 1;
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
 
@@ -61,6 +60,7 @@ abstract public class Brick  {
 
     protected abstract Shape makeBrickFace(Point pos,Dimension size);
 
+    // impact will be only set if the brick is not broken
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
             return false;
