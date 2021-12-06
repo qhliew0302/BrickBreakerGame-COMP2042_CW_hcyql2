@@ -30,15 +30,15 @@ public class RubberBall extends Ball {
 
 
     public RubberBall(Point2D center){
-        super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
+        super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR); // call the constructor of parent class Ball
     }
 
 
     @Override
     protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
 
-        double x = center.getX() - (radiusA / 2);
-        double y = center.getY() - (radiusB / 2);
+        double x = center.getX() - (radiusA / 2); // get the X-coordinate of the upper left corner of framing rectangle
+        double y = center.getY() - (radiusB / 2); // get the X-coordinate of the upper left corner of framing rectangle
 
         return new Ellipse2D.Double(x,y,radiusA,radiusB);
     }

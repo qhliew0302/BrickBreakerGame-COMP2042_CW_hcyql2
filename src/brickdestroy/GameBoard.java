@@ -42,6 +42,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Timer gameTimer;
 
     private Wall wall;
+    private Level level;
 
     private String message;
 
@@ -71,10 +72,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.initialize();
         message = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
+        level = new Level(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3, 6/2, wall);
 
-        debugConsole = new DebugConsole(owner,wall,this);
+        debugConsole = new DebugConsole(owner,wall,level,this);
         //initialize the first level
-        wall.nextLevel();
+        level.nextLevel();
 
         gameTimer = new Timer(10,e ->{
             wall.move();
@@ -89,12 +91,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 gameTimer.stop();
             }
             else if(wall.isDone()){
-                if(wall.hasLevel()){
+                if(level.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
                     wall.ballReset();
                     wall.wallReset();
-                    wall.nextLevel();
+                    level.nextLevel();
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
@@ -106,8 +108,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         });
 
     }
-
-
 
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
@@ -128,13 +128,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
 
-        drawBall(wall.ball,g2d);
+        drawBall(wall.getBall(),g2d);
 
-        for(Brick b : wall.bricks)
+        for(Brick b : wall.getBricks())
             if(!b.isBroken())
                 drawBrick(b,g2d);
 
-        drawPlayer(wall.player,g2d);
+        drawPlayer(wall.getPlayer(),g2d);
 
         if(showPauseMenu)
             drawMenu(g2d);
@@ -271,10 +271,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()){
             case KeyEvent.VK_A:
-                wall.player.moveLeft();
+                wall.getPlayer().moveLeft();
                 break;
             case KeyEvent.VK_D:
-                wall.player.movRight();
+                wall.getPlayer().moveRight();
                 break;
             case KeyEvent.VK_ESCAPE:
                 showPauseMenu = !showPauseMenu;
@@ -292,13 +292,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 if(keyEvent.isAltDown() && keyEvent.isShiftDown())
                     debugConsole.setVisible(true);
             default:
-                wall.player.stop();
+                wall.getPlayer().stop();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-        wall.player.stop();
+        wall.getPlayer().stop();
     }
 
     @Override
