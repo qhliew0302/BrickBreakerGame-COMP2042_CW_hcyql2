@@ -120,7 +120,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         g2d.translate(x,y);
 
-        //methods calls
+        //method calls
         drawText(g2d);
         drawButton(g2d);
         //end of methods calls
@@ -204,14 +204,15 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         y += 35.0;
 
-        setPosition(g2d, exitButton, exitTextRectangle, exitClicked, EXIT_TEXT, x, y);
+        setPosition(g2d, infoButton, infoTextRectangle, infoClicked, INFO_TEXT, x, y);
 
-        x = exitButton.x;
-        y = exitButton.y;
+        x = infoButton.x;
+        y = infoButton.y;
 
         y += 35.0;
 
-        setPosition(g2d, infoButton, infoTextRectangle, infoClicked, INFO_TEXT, x, y);
+        setPosition(g2d, exitButton, exitTextRectangle, exitClicked, EXIT_TEXT, x, y);
+
 
     }
 
@@ -243,14 +244,13 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         Point p = mouseEvent.getPoint();
         if(startButton.contains(p)){
            owner.enableGameBoard();
-
         }
         else if(exitButton.contains(p)){
             System.out.println("Goodbye " + System.getProperty("user.name"));
             System.exit(0);
         }
         else if(infoButton.contains(p)){
-
+            owner.enableGameInfo();
         }
     }
 
@@ -274,7 +274,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(startClicked ){
+        if(startClicked){
             startClicked = false;
             repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
         }
