@@ -17,6 +17,8 @@
  */
 package brickdestroy;
 
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -59,6 +61,8 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setResizable(false);
     }
 
+
+
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -69,6 +73,8 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.addWindowFocusListener(this);
 
     }
+
+
 
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -97,4 +103,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
             gameBoard.onLostFocus();
 
     }
+
+
 }
