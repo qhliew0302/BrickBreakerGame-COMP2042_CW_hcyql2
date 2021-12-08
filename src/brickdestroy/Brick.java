@@ -36,7 +36,6 @@ abstract public class Brick  {
 
 
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
-        rnd = new Random();
         broken = false;
         this.name = name;
         setBrickFace(makeBrickFace(pos,size));
@@ -44,10 +43,6 @@ abstract public class Brick  {
         this.inner = inner;
         this.fullStrength = this.strength = strength;
 
-    }
-
-    public static Random getRnd() {
-        return rnd;
     }
 
     public Shape getBrickFace() {

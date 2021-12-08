@@ -50,7 +50,7 @@ public class SteelBrick extends Brick {
         return brickFace;
     }
 
-    public  boolean setImpact(Point2D point , int dir){
+    public boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
         impact();
@@ -61,6 +61,10 @@ public class SteelBrick extends Brick {
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();
         }
+    }
+
+    public Random getRnd(){
+        return rnd;
     }
 
 }
