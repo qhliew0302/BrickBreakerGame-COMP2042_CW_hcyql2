@@ -1,11 +1,9 @@
 package brickdestroy;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 public class GameInfo extends JFrame implements ActionListener {
 
@@ -16,8 +14,6 @@ public class GameInfo extends JFrame implements ActionListener {
 
     private static final int DEF_WIDTH = 600;
     private static final int DEF_HEIGHT = 450;
-
-
 
 
     public GameInfo() {
@@ -67,7 +63,7 @@ public class GameInfo extends JFrame implements ActionListener {
         INFO_TEXT = new JLabel();
 
         String infoText =   "<html>" +
-                            "There are 6 levels in this Brick Destroy game. <br/><br/><br/>" +
+                            "There are 5 levels in this Brick Destroy game. <br/><br/><br/>" +
                             "1. Click the Start button to play the game.<br/>" +
                             "2. Click the Exit button to close the game.<br/>" +
                             "3. Press space bar to start/stop the motion of the ball.<br/>" +
@@ -93,7 +89,6 @@ public class GameInfo extends JFrame implements ActionListener {
         backButton.setFocusable(false);
         backButton.addActionListener(this);
     }
-
 
 
     @Override

@@ -3,7 +3,6 @@ package brickdestroy;
 import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.Random;
 
 /**
  * Created by filippo on 04/09/16.
@@ -53,7 +52,7 @@ abstract public class Brick  {
     }
 
     // impact will be only set if the brick is not broken
-    public  boolean setImpact(Point2D point , int dir){
+    public boolean setImpact(Point2D point , int dir){
         if(broken)
             return false;
         impact();

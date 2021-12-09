@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Level {
 
-    private Wall wall;
+    private static Wall wall;
     private Brick[][] levels;
     private int level;
 
@@ -112,4 +112,9 @@ public class Level {
     public boolean hasLevel(){
         return level < levels.length;
     }
+
+    public static Wall getWall(){
+        return wall;
+    }
+
 }
