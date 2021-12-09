@@ -1,9 +1,11 @@
 package brickdestroy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class GameInfo extends JFrame implements ActionListener {
 
@@ -14,6 +16,7 @@ public class GameInfo extends JFrame implements ActionListener {
 
     private static final int DEF_WIDTH = 600;
     private static final int DEF_HEIGHT = 450;
+
 
 
 
@@ -56,6 +59,8 @@ public class GameInfo extends JFrame implements ActionListener {
 
 
     }
+
+
 
     private void showInfoText(){
 
