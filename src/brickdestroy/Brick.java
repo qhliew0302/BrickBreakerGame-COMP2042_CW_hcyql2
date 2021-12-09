@@ -11,17 +11,11 @@ import java.util.Random;
  */
 abstract public class Brick  {
 
-    public static final int DEF_CRACK_DEPTH = 1;
-    public static final int DEF_STEPS = 35;
-
-
     public static final int UP_IMPACT = 100;
     public static final int DOWN_IMPACT = 200;
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-
-    private static Random rnd;
 
     private String name;
     private Shape brickFace;
@@ -36,7 +30,6 @@ abstract public class Brick  {
 
 
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
-        rnd = new Random();
         broken = false;
         this.name = name;
         setBrickFace(makeBrickFace(pos,size));
@@ -44,10 +37,6 @@ abstract public class Brick  {
         this.inner = inner;
         this.fullStrength = this.strength = strength;
 
-    }
-
-    public static Random getRnd() {
-        return rnd;
     }
 
     public Shape getBrickFace() {
@@ -58,7 +47,10 @@ abstract public class Brick  {
         this.brickFace = brickFace;
     }
 
-    protected abstract Shape makeBrickFace(Point pos,Dimension size);
+    // make a rectangular brick
+    public Shape makeBrickFace(Point pos,Dimension size){
+        return new Rectangle(pos,size);
+    }
 
     // impact will be only set if the brick is not broken
     public  boolean setImpact(Point2D point , int dir){

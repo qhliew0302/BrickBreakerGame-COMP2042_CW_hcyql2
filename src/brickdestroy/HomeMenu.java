@@ -17,6 +17,7 @@
  */
 package brickdestroy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -24,14 +25,16 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
 
     private static final String GREETINGS = "Welcome to:";
     private static final String GAME_TITLE = "Brick Destroy";
-    private static final String CREDITS = "Version 0.1";
+    private static final String CREDITS = "Version 1.0";
     private static final String START_TEXT = "Start";
     private static final String EXIT_TEXT = "Exit";
     private static final String INFO_TEXT = "Info";
@@ -39,8 +42,8 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private static final Color BG_COLOR = Color.GREEN.darker();
     private static final Color BORDER_COLOR = new Color(200,8,21); //Venetian Red
     private static final Color DASH_BORDER_COLOR = new  Color(255, 216, 0);//school bus yellow
-    private static final Color TEXT_COLOR = new Color(16, 52, 166);//egyptian blue
-    private static final Color CLICKED_BUTTON_COLOR = BG_COLOR.brighter();
+    private static final Color TEXT_COLOR = Color.WHITE;
+    private static final Color CLICKED_BUTTON_COLOR = Color.WHITE;
     private static final Color CLICKED_TEXT = Color.WHITE;
     private static final int BORDER_SIZE = 5;
     private static final float[] DASHES = {12,6};
@@ -64,6 +67,8 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private boolean startClicked;
     private boolean exitClicked;
     private boolean infoClicked;
+
+    BufferedImage backgroundImage;
 
 
     public HomeMenu(GameFrame owner,Dimension area){
@@ -92,7 +97,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         greetingsFont = new Font("Noto Mono",Font.PLAIN,25);
         gameTitleFont = new Font("Noto Mono",Font.BOLD,40);
         creditsFont = new Font("Monospaced",Font.PLAIN,10);
-        buttonFont = new Font("Monospaced",Font.PLAIN,startButton.height-2);
+        buttonFont = new Font("Monospaced",Font.BOLD,startButton.height-2);
 
 
 
@@ -131,25 +136,31 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.setColor(prevColor);
     }
 
-    private void drawContainer(Graphics2D g2d){
-        Color prev = g2d.getColor();
+    private void drawContainer(Graphics2D g2d) {
+        try{
+            backgroundImage =ImageIO.read(new File("src/brickdestroy/Background.jpg"));
+            g2d.drawImage(backgroundImage, 0,0,450,300,null);
+        }catch(IOException ex){
+            Color prev = g2d.getColor();
 
-        g2d.setColor(BG_COLOR);
-        g2d.fill(menuFace);
+            g2d.setColor(BG_COLOR);
+            g2d.fill(menuFace);
 
-        Stroke tmp = g2d.getStroke();
+            Stroke tmp = g2d.getStroke();
 
-        g2d.setStroke(borderStroke_noDashes);
-        g2d.setColor(DASH_BORDER_COLOR);
-        g2d.draw(menuFace);
+            g2d.setStroke(borderStroke_noDashes);
+            g2d.setColor(DASH_BORDER_COLOR);
+            g2d.draw(menuFace);
 
-        g2d.setStroke(borderStroke);
-        g2d.setColor(BORDER_COLOR);
-        g2d.draw(menuFace);
+            g2d.setStroke(borderStroke);
+            g2d.setColor(BORDER_COLOR);
+            g2d.draw(menuFace);
 
-        g2d.setStroke(tmp);
+            g2d.setStroke(tmp);
 
-        g2d.setColor(prev);
+            g2d.setColor(prev);
+        }
+
     }
 
     private void drawText(Graphics2D g2d){
