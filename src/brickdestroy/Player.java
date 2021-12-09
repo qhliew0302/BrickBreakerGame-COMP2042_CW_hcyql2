@@ -30,6 +30,8 @@ public class Player {
 
     private Rectangle playerFace;
     private Point ballPoint;
+
+
     private int moveAmount;
     private int min;
     private int max;
@@ -81,5 +83,9 @@ public class Player {
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
+    }
+
+    public int getMoveAmount() {
+        return moveAmount;
     }
 }
