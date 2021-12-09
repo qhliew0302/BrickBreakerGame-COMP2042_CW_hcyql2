@@ -63,7 +63,7 @@ public class GameInfo extends JFrame implements ActionListener {
         INFO_TEXT = new JLabel();
 
         String infoText =   "<html>" +
-                            "There are 6 levels in this Brick Destroy game. <br/><br/><br/>" +
+                            "There are 5 levels in this Brick Destroy game. <br/><br/><br/>" +
                             "1. Click the Start button to play the game.<br/>" +
                             "2. Click the Exit button to close the game.<br/>" +
                             "3. Press space bar to start/stop the motion of the ball.<br/>" +
