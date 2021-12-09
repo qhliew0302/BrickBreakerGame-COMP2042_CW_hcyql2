@@ -3,9 +3,11 @@ package brickdestroy;
 import java.awt.*;
 
 public class Level {
+
     private Wall wall;
     private Brick[][] levels;
     private int level;
+
 
     public Level(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Wall wall){
         levels = wall.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
@@ -19,6 +21,8 @@ public class Level {
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller than brickCount
          */
+
+        BrickFactory brickFactory = new BrickFactory();
         brickCnt -= brickCnt % lineCnt;
 
         int brickOnLine = brickCnt / lineCnt;
@@ -42,13 +46,13 @@ public class Level {
             x =(line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
             p.setLocation(x,y);
-            tmp[i] = Wall.makeBrick(p,brickSize,type);
+            tmp[i] = brickFactory.makeBrick(p,brickSize,type);
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = new ClayBrick(p,brickSize);
+            tmp[i] = brickFactory.makeBrick(p,brickSize,type);
         }
         return tmp;
 
@@ -59,6 +63,7 @@ public class Level {
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller than brickCount
          */
+        BrickFactory brickFactory = new BrickFactory();
         brickCnt -= brickCnt % lineCnt;
 
         int brickOnLine = brickCnt / lineCnt;
@@ -88,13 +93,13 @@ public class Level {
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  Wall.makeBrick(p,brickSize,typeA) : Wall.makeBrick(p,brickSize,typeB);
+            tmp[i] = b ?  brickFactory.makeBrick(p,brickSize,typeA) : brickFactory.makeBrick(p,brickSize,typeB);
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = Wall.makeBrick(p,brickSize,typeA);
+            tmp[i] = brickFactory.makeBrick(p,brickSize,typeA);
         }
         return tmp;
     }
