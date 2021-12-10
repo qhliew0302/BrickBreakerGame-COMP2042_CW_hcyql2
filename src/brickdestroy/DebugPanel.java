@@ -21,7 +21,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+import java.util.Hashtable;
 
 
 public class DebugPanel extends JPanel {
@@ -48,8 +48,8 @@ public class DebugPanel extends JPanel {
         skipLevel = makeButton("Skip Level",e -> level.nextLevel());
         resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
 
-        ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
-        ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
+        ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()), 1);
+        ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()), 2);
 
         this.add(skipLevel);
         this.add(resetBalls);
@@ -72,13 +72,22 @@ public class DebugPanel extends JPanel {
     }
 
     // make slider on the Debug Panel to manipulate the speed of ball
-    private JSlider makeSlider(int min, int max, ChangeListener e){
-        JSlider out = new JSlider(min,max);
-        out.setMajorTickSpacing(1);
-        out.setSnapToTicks(true);
-        out.setPaintTicks(true);
-        out.addChangeListener(e);
-        return out;
+    private JSlider makeSlider(int min, int max, ChangeListener e, int type){
+        JSlider slider = new JSlider(min,max);
+        slider.setMajorTickSpacing(1);
+        slider.setSnapToTicks(true);
+        slider.setPaintTicks(true);
+        Hashtable<Integer, JLabel> labels = new Hashtable<>();
+        if(type == 1){
+            labels.put(0, new JLabel("Ball's SpeedX"));
+        }
+        else{
+            labels.put(0, new JLabel("Ball's SpeedY"));
+        }
+        slider.setLabelTable(labels);
+        slider.setPaintLabels(true);
+        slider.addChangeListener(e);
+        return slider;
     }
 
     public void setValues(int x,int y){

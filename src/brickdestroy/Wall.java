@@ -30,6 +30,7 @@ public class Wall {
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
     private static final int MAGIC = 4;
+    private static final String RUBBER = "rubberBall";
 
     private Random rnd;
     private Rectangle area;
@@ -45,7 +46,11 @@ public class Wall {
     private int ballCount;
     private boolean ballLost;
 
+
     public Wall(Rectangle drawArea, Point ballPos){
+
+        BallFactory ballFactory = new BallFactory();
+        setBall(ballFactory.makeBall(RUBBER,ballPos));
 
         this.startPoint = new Point(ballPos);
 
@@ -54,7 +59,6 @@ public class Wall {
 
         rnd = new Random();
 
-        makeBall(ballPos);
         int speedX,speedY;
         do{
             speedX = rnd.nextInt(5) - 2;
@@ -80,11 +84,6 @@ public class Wall {
         tmp[3] = Level.makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
         tmp[4] = Level.makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,MAGIC,STEEL);
         return tmp;
-    }
-
-
-    private void makeBall(Point2D ballPos){
-        setBall(new RubberBall(ballPos));
     }
 
 
