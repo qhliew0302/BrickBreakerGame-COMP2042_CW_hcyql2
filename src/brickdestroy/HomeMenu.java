@@ -38,6 +38,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private static final String START_TEXT = "Start";
     private static final String EXIT_TEXT = "Exit";
     private static final String INFO_TEXT = "Info";
+    private static final String HIGHSCORE_TEXT = "High Score";
 
     private static final Color BG_COLOR = Color.GREEN.darker();
     private static final Color BORDER_COLOR = new Color(200,8,21); //Venetian Red
@@ -52,6 +53,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Rectangle startButton;
     private Rectangle exitButton;
     private Rectangle infoButton;
+    private Rectangle highScoreButton;
 
 
     private BasicStroke borderStroke;
@@ -67,6 +69,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private boolean startClicked;
     private boolean exitClicked;
     private boolean infoClicked;
+    private boolean highScoreClicked;
 
     BufferedImage backgroundImage;
 
@@ -90,6 +93,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         startButton = new Rectangle(btnDim);
         exitButton = new Rectangle(btnDim);
         infoButton = new Rectangle(btnDim);
+        highScoreButton = new Rectangle(btnDim);
 
         borderStroke = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND,0,DASHES,0);
         borderStroke_noDashes = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
@@ -97,7 +101,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         greetingsFont = new Font("Noto Mono",Font.PLAIN,25);
         gameTitleFont = new Font("Noto Mono",Font.BOLD,40);
         creditsFont = new Font("Monospaced",Font.PLAIN,10);
-        buttonFont = new Font("Monospaced",Font.BOLD,startButton.height-2);
+        buttonFont = new Font("Verdana",Font.BOLD,startButton.height-2);
 
 
 
@@ -176,7 +180,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         int sX,sY;
 
         sX = (int)(menuFace.getWidth() - greetingsRect.getWidth()) / 2;
-        sY = (int)(menuFace.getHeight() / 4);
+        sY = (int)(menuFace.getHeight() / 5);
 
         g2d.setFont(greetingsFont);
         g2d.drawString(GREETINGS,sX,sY);
@@ -203,11 +207,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         Rectangle2D startTextRectangle = buttonFont.getStringBounds(START_TEXT,frc);
         Rectangle2D exitTextRectangle = buttonFont.getStringBounds(EXIT_TEXT,frc);
         Rectangle2D infoTextRectangle = buttonFont.getStringBounds(INFO_TEXT,frc);
+        Rectangle2D highScoreTextRectangle = buttonFont.getStringBounds(HIGHSCORE_TEXT,frc);
 
         g2d.setFont(buttonFont);
 
         int x = (menuFace.width - startButton.width) / 2;
-        int y =(int) ((menuFace.height - startButton.height) * 0.6);
+        int y =(int) ((menuFace.height - startButton.height) * 0.55);
 
         setPosition(g2d, startButton, startTextRectangle, startClicked, START_TEXT, x, y);
 
@@ -224,6 +229,13 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         y += 35.0;
 
         setPosition(g2d, exitButton, exitTextRectangle, exitClicked, EXIT_TEXT, x, y);
+
+        x = exitButton.x;
+        y = exitButton.y;
+
+        y += 35.0;
+
+        setPosition(g2d, highScoreButton, highScoreTextRectangle, highScoreClicked, HIGHSCORE_TEXT, x, y);
 
 
     }
@@ -264,6 +276,9 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         else if(infoButton.contains(p)){
             new GameInfo();
         }
+        else if(highScoreButton.contains(p)){
+
+        }
     }
 
     @Override
@@ -282,6 +297,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
             infoClicked = true;
             repaint(infoButton.x, infoButton.y, infoButton.width+1, infoButton.height+1);
         }
+        else if(highScoreButton.contains(p)){
+            highScoreClicked = true;
+            repaint(highScoreButton.x, highScoreButton.y, highScoreButton.width+1, highScoreButton.height+1);
+        }
     }
 
     @Override
@@ -297,6 +316,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         else if(infoClicked){
             infoClicked = false;
             repaint(infoButton.x, infoButton.y, infoButton.width+1, infoButton.height+1);
+        }
+        else if(highScoreClicked){
+            highScoreClicked = false;
+            repaint(highScoreButton.x, highScoreButton.y, highScoreButton.width+1, highScoreButton.height+1);
         }
     }
 
@@ -319,7 +342,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
-        if(startButton.contains(p) || exitButton.contains(p) || infoButton.contains(p))
+        if(startButton.contains(p) || exitButton.contains(p) || infoButton.contains(p) || highScoreButton.contains(p))
             this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         else
             this.setCursor(Cursor.getDefaultCursor());
