@@ -104,6 +104,7 @@ public class Level {
         return tmp;
     }
 
+
     public void nextLevel(){
         wall.setBricks(levels[level++]);
         wall.setBrickCount(wall.getBricks().length);
