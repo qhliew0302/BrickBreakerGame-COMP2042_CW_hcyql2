@@ -1,8 +1,5 @@
 package brickdestroy;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -23,7 +20,7 @@ public class GameTimer {
 
     public GameTimer() {
         second = 0;
-        minute = 1;
+        minute = 5;
         gameStatus = false;
         dFormat = new DecimalFormat("00");
         ddSecond = dFormat.format(second);
@@ -86,6 +83,6 @@ public class GameTimer {
 
     public void resetTimer(){
         second = 0;
-        minute = 1;
+        minute = 5;
     }
 }
