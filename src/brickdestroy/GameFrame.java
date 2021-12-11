@@ -102,9 +102,14 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
-        if(gaming)
-            gameBoard.onLostFocus();
+        if(gaming){
+            try{
+                gameBoard.onLostFocus();
+            }catch(Exception e){
+                rankGameBoard.onLostFocus();
+            }
 
+        }
     }
 
 
