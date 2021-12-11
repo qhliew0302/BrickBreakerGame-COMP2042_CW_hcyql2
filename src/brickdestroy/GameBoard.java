@@ -48,6 +48,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private String message;
     private String timerMessage;
+    private String scoreMessage;
 
     private boolean showPauseMenu;
 
@@ -61,6 +62,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private DebugConsole debugConsole;
     private boolean rankMode;
     private String gameType;
+    private GameScore gameScore;
+    private int score;
+    private int bonusScore;
+    private int brickCount;
+    private int brickCountDiff;
 
 
     public GameBoard(JFrame owner, String gameType){
@@ -84,11 +90,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         //initialize the first level
         level.nextLevel();
         if(gameType == RANK){
-            rankMode = true;
-            gameTimer = new GameTimer();
-            gameTimer.resetTimer();
-            timerMessage = "";
-            timerMessage = String.format("Time Left: %s:%s", gameTimer.getDdMinute(), gameTimer.getDdSecond());
+            enableRankMode(wall);
         }
 
         timer = new Timer(10, e ->{
@@ -96,7 +98,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.findImpacts();
             message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
             if(rankMode){
+                calculateScore();
                 timerMessage = String.format("Time Left: %s:%s", gameTimer.getDdMinute(), gameTimer.getDdSecond());
+                scoreMessage = String.format("Score: %d", gameScore.getScore());
                 gameTimer.setGameStatus(true);
                 if(gameTimer.getSecond() == 0 && gameTimer.getMinute() == 0){
                     wall.wallReset();
@@ -110,13 +114,19 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 if(wall.ballEnd()){
                     wall.wallReset();
                     message = "Game over";
-                    if(rankMode)
+                    if(rankMode){
                         gameTimer.resetTimer();
+                        gameScore.resetScore();
+                        fixSpeed();
+                        brickCount = wall.getBrickCount();
+                    }
                 }
                 wall.ballReset();
                 timer.stop();
-                if(rankMode)
+                if(rankMode){
                     gameTimer.setGameStatus(false);
+                    fixSpeed();
+                }
             }
             else if(wall.isDone()){
                 if(level.hasLevel()){
@@ -125,13 +135,19 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.ballReset();
                     wall.wallReset();
                     level.nextLevel();
+                    if(rankMode)
+                        calculateScore();
+                    brickCount = wall.getBrickCount();
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
                     timer.stop();
                 }
-                if(rankMode)
+                if(rankMode){
                     gameTimer.resetTimer();
+                    gameTimer.setGameStatus(false);
+                    fixSpeed();
+                }
             }
 
             repaint();
@@ -148,6 +164,41 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addMouseMotionListener(this);
     }
 
+    private void enableRankMode(Wall wall){
+        rankMode = true;
+        gameTimer = new GameTimer();
+        gameScore = new GameScore();
+        gameTimer.resetTimer();
+        gameTimer.setGameStatus(false);
+        timerMessage = "";
+        scoreMessage = "";
+        timerMessage = String.format("Time Left: %s:%s", gameTimer.getDdMinute(), gameTimer.getDdSecond());
+        scoreMessage = String.format("Score: %d", gameScore.getScore());
+        score = gameScore.getScore();
+        brickCount = wall.getBrickCount();
+        fixSpeed();
+    }
+
+    private void calculateScore(){
+        score = gameScore.getScore();
+        bonusScore = 0;
+        if(brickCount > wall.getBrickCount()){
+            brickCountDiff = brickCount- wall.getBrickCount();
+            brickCount = wall.getBrickCount();
+        }
+        if(wall.getBrickCount() == 0){
+            bonusScore = wall.getBallCount() + (gameTimer.getMinute() * 60) + gameTimer.getSecond();
+        }
+        score += brickCountDiff + bonusScore;
+        brickCountDiff = 0;
+        gameScore.setScore(score);
+    }
+
+    private void fixSpeed(){
+        wall.getBall().setXSpeed(3);
+        wall.getBall().setYSpeed(-3);
+    }
+
 
     public void paint(Graphics g){
 
@@ -157,8 +208,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
-        if(rankMode)
+        if(rankMode){
             g2d.drawString(timerMessage, 10, 80);
+            g2d.drawString(scoreMessage, 500,80);
+        }
 
         drawBall(wall.getBall(),g2d);
 
@@ -193,6 +246,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(tmp);
     }
+
 
     // draw Ball
     private void drawBall(Ball ball,Graphics2D g2d){
