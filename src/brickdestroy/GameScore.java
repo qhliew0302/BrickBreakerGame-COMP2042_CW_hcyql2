@@ -5,7 +5,7 @@ public class GameScore {
     private int score;
 
     public GameScore(){
-        score = getScore();
+        score = 0;
     }
 
     public int getScore() {
@@ -14,6 +14,10 @@ public class GameScore {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void resetScore(){
+        score = 0;
     }
 
 }

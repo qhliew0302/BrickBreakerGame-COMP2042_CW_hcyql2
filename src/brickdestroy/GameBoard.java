@@ -64,6 +64,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private String gameType;
     private GameScore gameScore;
     private int score;
+    private int bonusScore;
     private int brickCount;
     private int brickCountDiff;
 
@@ -115,7 +116,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     message = "Game over";
                     if(rankMode){
                         gameTimer.resetTimer();
+                        gameScore.resetScore();
                         fixSpeed();
+                        brickCount = wall.getBrickCount();
                     }
                 }
                 wall.ballReset();
@@ -132,7 +135,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.ballReset();
                     wall.wallReset();
                     level.nextLevel();
-                    calculateScore();
+                    if(rankMode)
+                        calculateScore();
                     brickCount = wall.getBrickCount();
                 }
                 else{
@@ -176,11 +180,16 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     private void calculateScore(){
+        score = gameScore.getScore();
+        bonusScore = 0;
         if(brickCount > wall.getBrickCount()){
             brickCountDiff = brickCount- wall.getBrickCount();
             brickCount = wall.getBrickCount();
         }
-        score += brickCountDiff;
+        if(wall.getBrickCount() == 0){
+            bonusScore = wall.getBallCount() + (gameTimer.getMinute() * 60) + gameTimer.getSecond();
+        }
+        score += brickCountDiff + bonusScore;
         brickCountDiff = 0;
         gameScore.setScore(score);
     }
