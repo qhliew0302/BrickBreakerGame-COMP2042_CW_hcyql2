@@ -1,12 +1,8 @@
-package brickdestroy;
+package brickdestroy.model;
 
 import org.junit.jupiter.api.Test;
-
 import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Random;
 
 class SteelBrickTest {
 
@@ -36,8 +32,8 @@ class SteelBrickTest {
 
     @Test
     void impact() {
+        steelbrick.impact();
         if (steelbrick.getRnd().nextDouble() < STEEL_PROBABILITY){
-            steelbrick.impact();
             assertTrue(steelbrick.isBroken());
         }
         else{
