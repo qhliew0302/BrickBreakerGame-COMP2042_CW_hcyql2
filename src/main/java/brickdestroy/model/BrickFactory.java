@@ -2,6 +2,9 @@ package brickdestroy.model;
 
 import java.awt.*;
 
+/**
+ * A brick factory that returns a brick object based on the brick type.
+ */
 public class BrickFactory {
 
     private static final int CLAY = 1;
@@ -9,6 +12,14 @@ public class BrickFactory {
     private static final int CEMENT = 3;
     private static final int MAGIC = 4;
 
+    /**
+     * Returns a brick object based on the brick type.
+     *
+     * @param point position of brick
+     * @param size size of brick (width and height)
+     * @param brickType type of brick
+     * @return a brick object based on type
+     */
     public Brick makeBrick(Point point, Dimension size, int brickType){
         if(brickType < 1 || brickType > 4){
             return null;
