@@ -2,10 +2,8 @@ package brickdestroy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameInfo extends JFrame implements ActionListener {
+public class GameInfo extends JFrame{
 
     private JLabel INFO_TITLE;
     private JLabel INFO_TEXT;
@@ -15,8 +13,11 @@ public class GameInfo extends JFrame implements ActionListener {
     private static final int DEF_WIDTH = 600;
     private static final int DEF_HEIGHT = 450;
 
+    private GameInfoController gameInfoController;
+
 
     public GameInfo() {
+        gameInfoController = new GameInfoController(this);
         showInfoTitle();
         showInfoText();
         drawButton();
@@ -50,7 +51,7 @@ public class GameInfo extends JFrame implements ActionListener {
         String infoText = "How To Play";
 
         INFO_TITLE.setText(infoText);
-        INFO_TITLE.setBounds(220,30,500,40);
+        INFO_TITLE.setBounds(220,15,500,40);
         INFO_TITLE.setFont(new Font("Verdana",Font.BOLD,20));
 
 
@@ -63,15 +64,20 @@ public class GameInfo extends JFrame implements ActionListener {
         INFO_TEXT = new JLabel();
 
         String infoText =   "<html>" +
-                            "There are 5 levels in this Brick Destroy game. <br/><br/><br/>" +
-                            "1. Click the Start button to play the game.<br/>" +
-                            "2. Click the Exit button to close the game.<br/>" +
-                            "3. Press space bar to start/stop the motion of the ball.<br/>" +
-                            "4. Press A key or left arrow key to move the Player bar to the left.<br/>" +
-                            "5. Press D key or right arrow key to move the Player bar to the right.<br/>" +
-                            "6. Press ALT key + Shift key + F1 key to call the Debug Console.<br/>" +
-                            "7. The debug console is used to change the ball's speed, skip level and reset ball.<br/>" +
-                            "8. Press Esc key to show Pause Menu.</html>";
+                            "There are two modes in this Brick Destroy game.<br/>" +
+                            "In normal mode, the player can skip level and adjust the ball's speed.<br/>" +
+                            "In ranked mode, timer will be set and score will be recorded.<br/>" +
+                            "Skipping levels and changing ball's speed are not allowed in ranked mode!<br/>" +
+                            "There are 5 levels in each mode. <br/><br/>" +
+                            "1. Click the Start button to enter normal mode.<br/>" +
+                            "2. Click the Ranked Mode button to enter ranked mode.<br/>" +
+                            "3. Click the Exit button to close the game.<br/>" +
+                            "4. Press space bar to start/stop the motion of the ball.<br/>" +
+                            "5. Press A key or left arrow key to move the Player bar to the left.<br/>" +
+                            "6. Press D key or right arrow key to move the Player bar to the right.<br/>" +
+                            "7. Press ALT key + Shift key + F1 key to call the Debug Console. (Not applicable in ranked mode)<br/>" +
+                            "8. The debug console is used to change the ball's speed, skip level and reset ball.<br/>" +
+                            "9. Press Esc key to show Pause Menu.</html>";
 
         INFO_TEXT.setText(infoText);
         INFO_TEXT.setBounds(60,50,500,300);
@@ -87,15 +93,11 @@ public class GameInfo extends JFrame implements ActionListener {
         backButton.setForeground(Color.BLACK);
         backButton.setBackground(Color.white);
         backButton.setFocusable(false);
-        backButton.addActionListener(this);
+        backButton.addActionListener(gameInfoController);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        if(event.getSource() == backButton){
-            dispose();
-            new GameFrame();
-        }
+    public JButton getBackButton(){
+        return backButton;
     }
+
 }
