@@ -1,7 +1,6 @@
-package brickdestroy;
+package brickdestroy.model;
 
 import org.junit.jupiter.api.Test;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Ellipse2D;
@@ -14,6 +13,7 @@ class RubberBallTest {
     private final Color DEF_INNER_COLOR = new Color(255, 219, 88);
     private final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
     private Point2D center = new Point2D.Double(200, 200);
+    Point position = new Point(0, 0);
 
     RubberBall rubberBall = new RubberBall(center);
 
@@ -23,6 +23,7 @@ class RubberBallTest {
         RectangularShape ball = (RectangularShape) rubberBallFace;
         assertEquals(ball, rubberBallFace);
     }
+
 
     @Test
     void setSpeed() {
@@ -83,6 +84,9 @@ class RubberBallTest {
         Shape rubberBallFace = rubberBall.makeBall(center, DEF_RADIUS, DEF_RADIUS);
         RectangularShape ball = (RectangularShape) rubberBallFace;
         assertEquals(ball, rubberBallFace);
+        rubberBall.moveTo(position);
+        assertEquals(position, rubberBall.getPosition());
+
     }
 
     @Test
