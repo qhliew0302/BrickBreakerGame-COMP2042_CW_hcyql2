@@ -41,13 +41,17 @@ public class MagicBrick extends Brick{
     }
 
     public void slowDown(){
-        Level.getWall().setBallXSpeed(Level.getWall().getBall().getSpeedX() - 1);
-        Level.getWall().setBallYSpeed(Level.getWall().getBall().getSpeedX() - 1);
+        if((Level.getWall().getBall().getSpeedX() > -4) && (Level.getWall().getBall().getSpeedX() != 1))
+            Level.getWall().setBallXSpeed(Level.getWall().getBall().getSpeedX() - 1);
+        if(Level.getWall().getBall().getSpeedY() > -4 && (Level.getWall().getBall().getSpeedY() != 1))
+            Level.getWall().setBallYSpeed(Level.getWall().getBall().getSpeedY() - 1);
     }
 
     public void speedUp(){
-        Level.getWall().setBallXSpeed(Level.getWall().getBall().getSpeedX() + 1);
-        Level.getWall().setBallYSpeed(Level.getWall().getBall().getSpeedX() + 1);
+        if((Level.getWall().getBall().getSpeedX() < 4) && (Level.getWall().getBall().getSpeedX() != -1))
+            Level.getWall().setBallXSpeed(Level.getWall().getBall().getSpeedX() + 1);
+        if(Level.getWall().getBall().getSpeedY() < 4 && (Level.getWall().getBall().getSpeedY() != -1))
+            Level.getWall().setBallYSpeed(Level.getWall().getBall().getSpeedY() + 1);
     }
 
     public int getRandom(){
