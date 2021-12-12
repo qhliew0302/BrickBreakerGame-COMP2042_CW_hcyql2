@@ -73,6 +73,8 @@ public class GameBoardController implements KeyListener, MouseListener, MouseMot
             gameBoard.setMessage("Restarting Game...");
             gameBoard.getWall().ballReset();
             gameBoard.getWall().wallReset();
+            gameBoard.getGameTimer().resetTimer();
+            gameBoard.getGameScore().resetScore();
             gameBoard.setShowPauseMenu(false);
             gameBoard.repaint();
         }
@@ -111,7 +113,7 @@ public class GameBoardController implements KeyListener, MouseListener, MouseMot
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
         if(gameBoard.getExitButtonRect() != null && gameBoard.isShowPauseMenu()) {
-            if (gameBoard.getExitButtonRect().contains(p) || gameBoard.getExitButtonRect().contains(p) || gameBoard.getRestartButtonRect().contains(p))
+            if (gameBoard.getContinueButtonRect().contains(p) || gameBoard.getExitButtonRect().contains(p) || gameBoard.getRestartButtonRect().contains(p))
                 this.gameBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             else
                 this.gameBoard.setCursor(Cursor.getDefaultCursor());

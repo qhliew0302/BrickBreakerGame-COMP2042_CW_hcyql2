@@ -147,6 +147,8 @@ public class GameBoard extends JComponent{
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
+                    if(rankMode)
+                        highScore.checkScore();
                     timer.stop();
                 }
                 if(rankMode){
