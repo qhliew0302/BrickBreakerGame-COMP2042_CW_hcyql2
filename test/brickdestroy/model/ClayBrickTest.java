@@ -1,7 +1,6 @@
-package brickdestroy;
+package brickdestroy.model;
 
 import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClayBrickTest {
