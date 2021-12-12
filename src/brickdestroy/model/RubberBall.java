@@ -35,7 +35,7 @@ public class RubberBall extends Ball {
 
 
     @Override
-    protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
+    public Shape makeBall(Point2D center, int radiusA, int radiusB) {
 
         double x = center.getX() - (radiusA / 2); // get the X-coordinate of the upper left corner of framing rectangle
         double y = center.getY() - (radiusB / 2); // get the X-coordinate of the upper left corner of framing rectangle
