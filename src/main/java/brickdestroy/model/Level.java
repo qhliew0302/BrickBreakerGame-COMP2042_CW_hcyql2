@@ -2,6 +2,10 @@ package brickdestroy.model;
 
 import java.awt.*;
 
+/**
+ * A level class that is responsible to make levels of games,
+ * to switch to next level and to check whether there is any more levels left.
+ */
 public class Level {
 
     private static Wall wall;
@@ -9,6 +13,15 @@ public class Level {
     private int level;
 
 
+    /**
+     * A level constructor thar initialises the level class variables.
+     *
+     * @param drawArea the area to draw the levels
+     * @param brickCount the number of bricks
+     * @param lineCount the number of lines of bricks
+     * @param brickDimensionRatio the dimension ratio of brick
+     * @param wall the wall object
+     */
     public Level(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Wall wall){
         levels = wall.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
@@ -16,6 +29,15 @@ public class Level {
 
     }
 
+    /**
+     * Makes a level that has only one type of brick.
+     *
+     * @param drawArea the area to draw the levels
+     * @param brickCnt the number of bricks
+     * @param brickSizeRatio the size ratio of the brick
+     * @param type the type of brick
+     * @return the brick arrangement
+     */
     public static Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -58,6 +80,17 @@ public class Level {
 
     }
 
+    /**
+     * Makes a level that has two types of bricks.
+     *
+     * @param drawArea the area to draw the levels
+     * @param brickCnt the number of bricks
+     * @param lineCnt the number of lines of bricks
+     * @param brickSizeRatio the size ratio of brick
+     * @param typeA first type of brick
+     * @param typeB second type of brick
+     * @return brick arrangement
+     */
     public static Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -105,15 +138,28 @@ public class Level {
     }
 
 
+    /**
+     * Switches to next level.
+     */
     public void nextLevel(){
         wall.setBricks(levels[level++]);
         wall.setBrickCount(wall.getBricks().length);
     }
 
+    /**
+     * Checks whether there is any more levels.
+     *
+     * @return false if there is no more level and vice versa
+     */
     public boolean hasLevel(){
         return level < levels.length;
     }
 
+    /**
+     * Gets the wall object.
+     *
+     * @return wall object
+     */
     public static Wall getWall(){
         return wall;
     }
