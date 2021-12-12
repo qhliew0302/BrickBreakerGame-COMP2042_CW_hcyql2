@@ -19,12 +19,11 @@ package brickdestroy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
 
 
-public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
+public class GameBoard extends JComponent{
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
@@ -45,6 +44,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private Wall wall;
     private Level level;
+    private GameBoardController gameBoardController;
 
     private String message;
     private String timerMessage;
@@ -74,7 +74,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public GameBoard(JFrame owner, String gameType){
         super();
 
-
+        gameBoardController = new GameBoardController(this);
         strLen = 0;
         showPauseMenu = false;
         this.gameType = gameType;
@@ -163,9 +163,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.addKeyListener(this);
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
+        this.addKeyListener(gameBoardController);
+        this.addMouseListener(gameBoardController);
+        this.addMouseMotionListener(gameBoardController);
     }
 
     private void enableRankMode(Wall wall){
@@ -364,114 +364,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         return gameScore;
     }
 
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        switch(keyEvent.getKeyCode()){
-            case KeyEvent.VK_A:
-            case KeyEvent.VK_LEFT: // left arrow key
-                wall.getPlayer().moveLeft();
-                break;
-            case KeyEvent.VK_D:
-            case KeyEvent.VK_RIGHT: // right arrow key
-                wall.getPlayer().moveRight();
-                break;
-            case KeyEvent.VK_ESCAPE:
-                showPauseMenu = !showPauseMenu;
-                repaint();
-                timer.stop();
-                if(rankMode)
-                    gameTimer.setGameStatus(false);
-                break;
-            case KeyEvent.VK_SPACE:
-                if(!showPauseMenu) {
-                    if (timer.isRunning()) {
-                        if(rankMode)
-                            gameTimer.setGameStatus(false);
-                        timer.stop();
-                    } else {
-                        if(rankMode)
-                            gameTimer.setGameStatus(true);
-                        timer.start();
-                    }
-                }
-                break;
-            case KeyEvent.VK_F1:
-                if(keyEvent.isAltDown() && keyEvent.isShiftDown() && !rankMode)
-                    debugConsole.setVisible(true);
-            default:
-                wall.getPlayer().stop();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-        wall.getPlayer().stop();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(!showPauseMenu)
-            return;
-        if(continueButtonRect.contains(p)){
-            showPauseMenu = false;
-            repaint();
-        }
-        else if(restartButtonRect.contains(p)){
-            message = "Restarting Game...";
-            wall.ballReset();
-            wall.wallReset();
-            showPauseMenu = false;
-            repaint();
-        }
-        else if(exitButtonRect.contains(p)){
-            System.exit(0);
-        }
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(exitButtonRect != null && showPauseMenu) {
-            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            else
-                this.setCursor(Cursor.getDefaultCursor());
-        }
-        else{
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-    }
 
     public void onLostFocus(){
         timer.stop();
@@ -479,4 +371,47 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         repaint();
     }
 
+    public Wall getWall(){
+        return wall;
+    }
+
+    public boolean isShowPauseMenu(){
+        return showPauseMenu;
+    }
+
+    public void setShowPauseMenu(boolean showPauseMenu){
+        this.showPauseMenu = showPauseMenu;
+    }
+
+    public DebugConsole getDebugConsole(){
+        return debugConsole;
+    }
+
+    public boolean isRankMode(){
+        return rankMode;
+    }
+
+    public GameTimer getGameTimer(){
+        return gameTimer;
+    }
+
+    public Timer getTimer(){
+        return timer;
+    }
+
+    public Rectangle getContinueButtonRect(){
+        return continueButtonRect;
+    }
+
+    public Rectangle getExitButtonRect(){
+        return exitButtonRect;
+    }
+
+    public Rectangle getRestartButtonRect(){
+        return restartButtonRect;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
+    }
 }
