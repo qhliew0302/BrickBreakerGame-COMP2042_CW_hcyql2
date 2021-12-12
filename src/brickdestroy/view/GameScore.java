@@ -1,4 +1,4 @@
-package brickdestroy;
+package brickdestroy.view;
 
 public class GameScore {
 

@@ -18,6 +18,7 @@
 package brickdestroy;
 
 import java.awt.*;
+import brickdestroy.view.*;
 
 
 public class GraphicsMain {

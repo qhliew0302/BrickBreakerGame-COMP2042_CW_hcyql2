@@ -1,7 +1,8 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import java.awt.*;
 import java.awt.event.*;
+import brickdestroy.view.*;
 
 public class GameBoardController implements KeyListener, MouseListener, MouseMotionListener {
 

@@ -1,4 +1,4 @@
-package brickdestroy;
+package brickdestroy.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,7 +57,7 @@ public class HighScoreView extends JFrame implements ActionListener {
         FileReader readFile;
         BufferedReader reader = null;
         try{
-            readFile = new FileReader("src/brickdestroy/highScore.txt");
+            readFile = new FileReader("src/brickdestroy/resources/highScore.txt");
             reader = new BufferedReader(readFile);
             highScore1 = reader.readLine();
             highScore2 = reader.readLine();

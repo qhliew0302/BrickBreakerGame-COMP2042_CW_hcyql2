@@ -1,7 +1,8 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import brickdestroy.view.*;
 
 public class GameFrameController implements WindowFocusListener {
 
