@@ -20,9 +20,6 @@ package brickdestroy;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -30,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
+public class HomeMenu extends JComponent {
 
     private static final String GREETINGS = "Welcome to:";
     private static final String GAME_TITLE = "Brick Destroy";
@@ -67,12 +64,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Font buttonFont;
 
     private GameFrame owner;
-
-    private boolean startClicked;
-    private boolean exitClicked;
-    private boolean infoClicked;
-    private boolean highScoreClicked;
-    private boolean rankClicked;
+    private HomeMenuController homeMenuController;
 
     BufferedImage backgroundImage;
 
@@ -83,12 +75,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         this.setFocusable(true);
         this.requestFocusInWindow();
-
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
+        HomeMenuController homeMenuController = new HomeMenuController(this);
+        this.homeMenuController = homeMenuController;
+        this.addMouseListener(homeMenuController);
+        this.addMouseMotionListener(homeMenuController);
 
         this.owner = owner;
-
 
 
         menuFace = new Rectangle(new Point(0,0),area);
@@ -221,27 +213,27 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         int x = (menuFace.width - startButton.width) / 2;
         int y =(int) ((menuFace.height - startButton.height) * 0.55);
 
-        setPosition(g2d, startButton, startTextRectangle, startClicked, START_TEXT, x - 80, y);
+        setPosition(g2d, startButton, startTextRectangle, homeMenuController.isStartClicked(), START_TEXT, x - 80, y);
 
-        setPosition(g2d, rankButton, rankTextRectangle, rankClicked, RANK_TEXT, x + 80, y);
+        setPosition(g2d, rankButton, rankTextRectangle, homeMenuController.isRankClicked(), RANK_TEXT, x + 80, y);
 
         y += 35.0;
 
-        setPosition(g2d, infoButton, infoTextRectangle, infoClicked, INFO_TEXT, x, y);
+        setPosition(g2d, infoButton, infoTextRectangle, homeMenuController.isInfoClicked(), INFO_TEXT, x, y);
 
         x = infoButton.x;
         y = infoButton.y;
 
         y += 35.0;
 
-        setPosition(g2d, exitButton, exitTextRectangle, exitClicked, EXIT_TEXT, x, y);
+        setPosition(g2d, exitButton, exitTextRectangle, homeMenuController.isExitClicked(), EXIT_TEXT, x, y);
 
         x = exitButton.x;
         y = exitButton.y;
 
         y += 35.0;
 
-        setPosition(g2d, highScoreButton, highScoreTextRectangle, highScoreClicked, HIGHSCORE_TEXT, x, y);
+        setPosition(g2d, highScoreButton, highScoreTextRectangle, homeMenuController.isHighScoreClicked(), HIGHSCORE_TEXT, x, y);
 
 
     }
@@ -269,106 +261,35 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-            gameType = START_TEXT;
-            owner.enableGameBoard(START_TEXT);
-        }
-        else if(exitButton.contains(p)){
-            System.out.println("Goodbye " + System.getProperty("user.name"));
-            System.exit(0);
-        }
-        else if(infoButton.contains(p)){
-            new GameInfo();
-        }
-        else if(highScoreButton.contains(p)){
-
-        }
-        else if(rankButton.contains(p)){
-            gameType = RANK_TEXT;
-            owner.enableGameBoard(RANK_TEXT);
-        }
+    public Rectangle getStartButton(){
+        return startButton;
     }
 
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-            startClicked = true;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-
-        }
-        else if(exitButton.contains(p)){
-            exitClicked = true;
-            repaint(exitButton.x, exitButton.y, exitButton.width+1, exitButton.height+1);
-        }
-        else if(infoButton.contains(p)){
-            infoClicked = true;
-            repaint(infoButton.x, infoButton.y, infoButton.width+1, infoButton.height+1);
-        }
-        else if(highScoreButton.contains(p)){
-            highScoreClicked = true;
-            repaint(highScoreButton.x, highScoreButton.y, highScoreButton.width+1, highScoreButton.height+1);
-        }
-        else if(rankButton.contains(p)){
-            rankClicked = true;
-            repaint(rankButton.x, rankButton.y, rankButton.width+1, rankButton.height+1);
-        }
+    public Rectangle getExitButton(){
+        return exitButton;
     }
 
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if(startClicked){
-            startClicked = false;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-        }
-        else if(exitClicked){
-            exitClicked = false;
-            repaint(exitButton.x, exitButton.y, exitButton.width+1, exitButton.height+1);
-        }
-        else if(infoClicked){
-            infoClicked = false;
-            repaint(infoButton.x, infoButton.y, infoButton.width+1, infoButton.height+1);
-        }
-        else if(highScoreClicked){
-            highScoreClicked = false;
-            repaint(highScoreButton.x, highScoreButton.y, highScoreButton.width+1, highScoreButton.height+1);
-        }
-        else if(rankClicked){
-            rankClicked = false;
-            repaint(rankButton.x, rankButton.y, rankButton.width+1, rankButton.height+1);
-        }
+    public Rectangle getInfoButton(){
+        return infoButton;
     }
 
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
+    public Rectangle getRankButton(){
+        return rankButton;
     }
 
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
+    public Rectangle getHighScoreButton(){
+        return highScoreButton;
     }
 
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p) || exitButton.contains(p) || infoButton.contains(p) || highScoreButton.contains(p) || rankButton.contains(p))
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        else
-            this.setCursor(Cursor.getDefaultCursor());
-
+    public GameFrame getOwner(){
+        return owner;
     }
 
     public String getGameType(){
         return gameType;
+    }
+
+    public void setGameType(String gameType){
+        this.gameType = gameType;
     }
 }
