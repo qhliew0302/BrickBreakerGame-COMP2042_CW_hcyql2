@@ -22,7 +22,7 @@ public class HighScoreController {
         FileReader readFile;
         BufferedReader reader = null;
         try{
-            readFile = new FileReader("src/brickdestroy/resources/highScore.txt");
+            readFile = new FileReader("src/main/java/brickdestroy/resources/highScore.txt");
             reader = new BufferedReader(readFile);
             highScore1 = reader.readLine();
             highScore2 = reader.readLine();
@@ -59,7 +59,7 @@ public class HighScoreController {
             highScore1 = name + " " + score;
         }
 
-        File scoreFile = new File("src/brickdestroy/highScore.txt");
+        File scoreFile = new File("src/main/java/brickdestroy/resources/highScore.txt");
         if(!scoreFile.exists()) {
             try {
                 scoreFile.createNewFile();

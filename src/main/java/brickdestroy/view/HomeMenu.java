@@ -141,7 +141,7 @@ public class HomeMenu extends JComponent {
 
     private void drawContainer(Graphics2D g2d) {
         try{
-            backgroundImage =ImageIO.read(new File("src/brickdestroy/resources/Background.jpg"));
+            backgroundImage =ImageIO.read(new File("src/main/java/brickdestroy/resources/Background.jpg"));
             g2d.drawImage(backgroundImage, 0,0,450,300,null);
         }catch(IOException ex){
             Color prev = g2d.getColor();
