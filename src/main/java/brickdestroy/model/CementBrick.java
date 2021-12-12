@@ -35,8 +35,8 @@ public class CementBrick extends Brick {
     }
 
     /**
-     * if the brick is broken, no impact is set
-     * else make an impact and if the brick is not broken, then make a crack
+     * If the brick is broken, no impact is set,
+     * else make an impact and if the brick is not broken, then make a crack.
      *
      * @param point position of the brick
      * @param dir direction of impact of brick
