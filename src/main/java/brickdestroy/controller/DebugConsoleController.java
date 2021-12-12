@@ -5,7 +5,9 @@ import java.awt.event.WindowListener;
 import brickdestroy.model.*;
 import brickdestroy.view.*;
 
-
+/**
+ * A debugConsole controller class that controls debugConsole Class.
+ */
 public class DebugConsoleController implements WindowListener {
     private DebugConsole debugConsole;
 

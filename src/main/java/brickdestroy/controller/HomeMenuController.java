@@ -6,6 +6,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import brickdestroy.view.*;
 
+/**
+ * A home menu controller class that controls the home menu class.
+ */
 public class HomeMenuController implements MouseListener, MouseMotionListener {
     private HomeMenu homeMenu;
 
@@ -42,6 +45,10 @@ public class HomeMenuController implements MouseListener, MouseMotionListener {
         return rankClicked;
     }
 
+    /**
+     * If the button on the homeMenu is clicked, different window will be prompted.
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -131,6 +138,11 @@ public class HomeMenuController implements MouseListener, MouseMotionListener {
 
     }
 
+    /**
+     * When the mouse hovers across the buttons, the cursor will change.
+     *
+     * @param mouseEvent mouse hovered across button
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();

@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import brickdestroy.view.*;
 
+/**
+ * A GameBoard Controller class that controls gameBoard class.
+ */
 public class GameBoardController implements KeyListener, MouseListener, MouseMotionListener {
 
     private GameBoard gameBoard;
@@ -16,6 +19,15 @@ public class GameBoardController implements KeyListener, MouseListener, MouseMot
     public void keyTyped(KeyEvent keyEvent) {
     }
 
+    /**
+     * Key A/ Arrow left key moves the player to the left.
+     * Key D/ Arrow right key moves the player to the right.
+     * Esc key shows Pause menu.
+     * Space bar pause/resume the game.
+     * ALT key + Shift key + F1 shows the debug console panel.
+     *
+     * @param keyEvent key pressed
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()){
@@ -60,6 +72,14 @@ public class GameBoardController implements KeyListener, MouseListener, MouseMot
         gameBoard.getWall().getPlayer().stop();
     }
 
+    /**
+     * In Pause menu,
+     * Continue is clicked, the game continues.
+     * Restart is clicked, the game restarts.
+     * Exit is clicked, the game window closes.
+     *
+     * @param mouseEvent mouse clicked
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -109,6 +129,12 @@ public class GameBoardController implements KeyListener, MouseListener, MouseMot
 
     }
 
+    /**
+     * When the mouse is hovered across the buttons in pause menu,
+     * the cursor changes.
+     *
+     * @param mouseEvent mouse hovered the button
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
