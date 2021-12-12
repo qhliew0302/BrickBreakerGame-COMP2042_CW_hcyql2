@@ -1,9 +1,10 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import brickdestroy.view.*;
 
 public class HomeMenuController implements MouseListener, MouseMotionListener {
     private HomeMenu homeMenu;

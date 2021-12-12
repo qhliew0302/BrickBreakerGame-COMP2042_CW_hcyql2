@@ -1,4 +1,4 @@
-package brickdestroy;
+package brickdestroy.view;
 
 import java.text.DecimalFormat;
 import java.util.TimerTask;

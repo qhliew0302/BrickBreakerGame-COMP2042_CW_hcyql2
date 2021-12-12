@@ -1,7 +1,8 @@
-package brickdestroy;
+package brickdestroy.view;
 
 import javax.swing.*;
 import java.awt.*;
+import brickdestroy.controller.*;
 
 public class GameInfo extends JFrame{
 

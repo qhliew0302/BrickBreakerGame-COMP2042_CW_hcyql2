@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package brickdestroy;
+package brickdestroy.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,6 +25,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import brickdestroy.controller.*;
 
 
 public class HomeMenu extends JComponent {
@@ -140,7 +141,7 @@ public class HomeMenu extends JComponent {
 
     private void drawContainer(Graphics2D g2d) {
         try{
-            backgroundImage =ImageIO.read(new File("src/brickdestroy/Background.jpg"));
+            backgroundImage =ImageIO.read(new File("src/brickdestroy/resources/Background.jpg"));
             g2d.drawImage(backgroundImage, 0,0,450,300,null);
         }catch(IOException ex){
             Color prev = g2d.getColor();

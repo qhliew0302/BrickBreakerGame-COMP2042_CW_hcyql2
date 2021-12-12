@@ -1,7 +1,8 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import javax.swing.*;
 import java.io.*;
+import brickdestroy.view.*;
 
 public class HighScoreController {
 
@@ -21,7 +22,7 @@ public class HighScoreController {
         FileReader readFile;
         BufferedReader reader = null;
         try{
-            readFile = new FileReader("src/brickdestroy/highScore.txt");
+            readFile = new FileReader("src/brickdestroy/resources/highScore.txt");
             reader = new BufferedReader(readFile);
             highScore1 = reader.readLine();
             highScore2 = reader.readLine();

@@ -1,4 +1,4 @@
-package brickdestroy;
+package brickdestroy.model;
 
 import java.awt.*;
 import java.awt.Point;

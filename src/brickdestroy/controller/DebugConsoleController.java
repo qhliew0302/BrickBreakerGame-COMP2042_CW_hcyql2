@@ -1,7 +1,10 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import brickdestroy.model.*;
+import brickdestroy.view.*;
+
 
 public class DebugConsoleController implements WindowListener {
     private DebugConsole debugConsole;

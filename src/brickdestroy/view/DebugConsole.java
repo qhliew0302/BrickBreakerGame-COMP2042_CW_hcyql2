@@ -15,10 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package brickdestroy;
+package brickdestroy.view;
 
 import javax.swing.*;
 import java.awt.*;
+import brickdestroy.model.*;
+import brickdestroy.controller.*;
 
 
 public class DebugConsole extends JDialog{

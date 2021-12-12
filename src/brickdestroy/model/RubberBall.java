@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package brickdestroy;
+package brickdestroy.model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -35,7 +35,7 @@ public class RubberBall extends Ball {
 
 
     @Override
-    protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
+    public Shape makeBall(Point2D center, int radiusA, int radiusB) {
 
         double x = center.getX() - (radiusA / 2); // get the X-coordinate of the upper left corner of framing rectangle
         double y = center.getY() - (radiusB / 2); // get the X-coordinate of the upper left corner of framing rectangle

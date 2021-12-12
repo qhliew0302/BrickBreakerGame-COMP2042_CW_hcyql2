@@ -1,7 +1,8 @@
-package brickdestroy;
+package brickdestroy.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import brickdestroy.view.*;
 
 public class GameInfoController implements ActionListener {
 
