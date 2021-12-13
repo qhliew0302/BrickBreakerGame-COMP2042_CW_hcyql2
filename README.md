@@ -3,7 +3,7 @@
 #### - Student ID: 20308255
 
 ## Project Name
-COMP2042_CW_hcql2
+COMP2042_CW_hcyql2
 
 ## Project Description
 The project is about maintaining and extending a re-implementation of a classic retro game (Brick Breaker).  
@@ -84,7 +84,7 @@ The proof of screenshots (Liew_QianHui_GitUse.pdf) is attached in the submitted 
 - There will be two score messages shown in the gameboard which are the player on-going score and the high score achieved read from the high score file.
 - The player's score will be accumulated until GameOver or all walls destroyed.
 - If the player manages to beat the high score, then the player will be asked for his/her name and the result will be stored in the high score file.
-- Hiigh Score file stores the top 3 highest score.
+- High Score file stores the top 3 highest score.
 3. Addition Level
 - A level is added with two bricks: Magic brick and Steel brick.
 - Magic brick (addition) will randomly change the ball's speed.(slow down or speed up)
