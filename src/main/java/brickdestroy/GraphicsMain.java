@@ -15,12 +15,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+/**
+ * A package that holds all the classes in the brick destroy game.
+ */
 package brickdestroy;
 
 import java.awt.*;
 import brickdestroy.view.*;
 
-
+/**
+ * The main class that runs the entire game.
+ *
+ * @author Liew Qian Hui
+ * @version 1.0
+ */
 public class GraphicsMain {
 
     public static void main(String[] args){

@@ -5,6 +5,9 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+/**
+ * A crack class that is responsible to make a crack on the cement brick.
+ */
 public class Crack{
 
     private static final int CRACK_SECTIONS = 3;
@@ -27,6 +30,13 @@ public class Crack{
     private Random random;
 
 
+    /**
+     * A crack constructor that initialises the variables in crack class.
+     *
+     * @param brick a brick object
+     * @param crackDepth the depth of crack
+     * @param steps steps of crack
+     */
     public Crack(Brick brick,int crackDepth, int steps){
         this.brick = brick;
         crack = new GeneralPath();
@@ -35,16 +45,28 @@ public class Crack{
         random = new Random();
     }
 
-
+    /**
+     * Draws crack on brick.
+     *
+     * @return crack path
+     */
     public GeneralPath draw(){
         return crack;
     }
 
+    /**
+     * Resets the crack by clearing the crack on the brick.
+     */
     public void reset(){
         crack.reset();
     }
 
-    // make a crack on the brick by determining the position of the crack on the brick
+    /**
+     * Makes a crack on the brick by determining the position of the crack on the brick.
+     *
+     * @param point point of impact
+     * @param direction direction of crack
+     */
     protected void makeCrack(Point2D point, int direction){
         Rectangle bounds = brick.getBrickFace().getBounds();
         Point impact = new Point((int)point.getX(),(int)point.getY());
@@ -84,7 +106,12 @@ public class Crack{
         }
     }
 
-    // draw the crack the brick
+    /**
+     * Draws the crack the brick.
+     *
+     * @param start starting point of the crack
+     * @param end ending point of the crack
+     */
     protected void makeCrack(Point start, Point end){
 
         GeneralPath path = new GeneralPath();
@@ -116,11 +143,25 @@ public class Crack{
         crack.append(path,true);
     }
 
+    /**
+     * Gets a random value to change the y-position of crack on the brick.
+     *
+     * @param bound depth of crack
+     * @return a random value to change the y-position of crack on the brick
+     */
     private int randomInBounds(int bound){
         int n = (bound * 2) + 1;
         return random.nextInt(n) - bound;
     }
 
+    /**
+     * Checks the crack, whether it is in the middle.
+     *
+     * @param i counter value
+     * @param steps steps of crack
+     * @param divisions divisions of crack
+     * @return in Middle status
+     */
     private boolean inMiddle(int i,int steps,int divisions){
         int low = (steps / divisions);
         int up = low * (divisions - 1);
@@ -128,6 +169,13 @@ public class Crack{
         return  (i > low) && (i < up);
     }
 
+    /**
+     * Checks the random number, whether it is greater than 0.7.
+     *
+     * @param bound depth of crack
+     * @param probability a probability of 0.7
+     * @return randomInBounds value or 0
+     */
     private int jumps(int bound,double probability){
 
         if(random.nextDouble() > probability)
@@ -136,6 +184,14 @@ public class Crack{
 
     }
 
+    /**
+     * Makes random ending point of crack.
+     *
+     * @param from starting point
+     * @param to ending point
+     * @param direction direction of the point
+     * @return ending point of crack
+     */
     private Point makeRandomPoint(Point from,Point to, int direction){
 
         Point out = new Point();

@@ -21,7 +21,10 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-
+/**
+ * A wall class that is responsible to set and get the state of the level,
+ * player, ball and bricks.
+ */
 public class Wall {
 
     private static final int LEVELS_COUNT = 5;
@@ -46,7 +49,11 @@ public class Wall {
     private int ballCount;
     private boolean ballLost;
 
-
+    /**
+     * A wall constructor that initialises the variables in wall class.
+     * @param drawArea the area to draw wall
+     * @param ballPos the position of ball
+     */
     public Wall(Rectangle drawArea, Point ballPos){
 
         BallFactory ballFactory = new BallFactory();
@@ -76,6 +83,15 @@ public class Wall {
 
     }
 
+    /**
+     * Makes level on the wall.
+     *
+     * @param drawArea the area to draw level
+     * @param brickCount the number of bricks
+     * @param lineCount the number of lines of bricks
+     * @param brickDimensionRatio the dimension ratio of brick
+     * @return brick arrangement
+     */
     public Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = Level.makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
@@ -86,12 +102,17 @@ public class Wall {
         return tmp;
     }
 
-
+    /**
+     * Moves player and ball.
+     */
     public void move(){
         getPlayer().move();
         getBall().move();
     }
 
+    /**
+     * Finds the impact of ball on player, brick and wall.
+     */
     public void findImpacts(){
         if(getPlayer().impact(getBall())){
             getBall().reverseY();
@@ -114,6 +135,11 @@ public class Wall {
         }
     }
 
+    /**
+     * Changes the direction of ball when there is an impact.
+     *
+     * @return true if impact is made and vice versa
+     */
     private boolean impactWall(){
         for(Brick b : getBricks()){
             switch(b.findImpact(getBall())) {
@@ -137,6 +163,11 @@ public class Wall {
         return false;
     }
 
+    /**
+     * Checks the ball, whether it impacts on the wall border.
+     *
+     * @return true if impact is made on the wall border and vice versa
+     */
     private boolean impactBorder(){
         Point2D p = getBall().getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
@@ -154,6 +185,9 @@ public class Wall {
         return ballLost;
     }
 
+    /**
+     * Resets the ball.
+     */
     public void ballReset(){
         getPlayer().moveTo(startPoint);
         getBall().moveTo(startPoint);
@@ -169,6 +203,9 @@ public class Wall {
         ballLost = false;
     }
 
+    /**
+     * Resets everything on the wall.
+     */
     public void wallReset(){
         for(Brick b : getBricks())
             b.repair();
@@ -176,10 +213,20 @@ public class Wall {
         ballCount = 3;
     }
 
+    /**
+     * Checks whether if there is no more ball left.
+     *
+     * @return true if no more ball and vice versa
+     */
     public boolean ballEnd(){
         return ballCount == 0;
     }
 
+    /**
+     * Check whether if there is any bricks left.
+     *
+     * @return true if no more brick left and vice versa
+     */
     public boolean isDone(){
         return brickCount == 0;
     }

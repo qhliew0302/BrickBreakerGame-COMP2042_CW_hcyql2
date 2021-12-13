@@ -24,7 +24,9 @@ import brickdestroy.model.*;
 import brickdestroy.controller.*;
 
 
-
+/**
+ * A game board class that draws the game on the screen.
+ */
 public class GameBoard extends JComponent{
 
     private static final String CONTINUE = "Continue";
@@ -172,6 +174,10 @@ public class GameBoard extends JComponent{
         this.addMouseMotionListener(gameBoardController);
     }
 
+    /**
+     * Enables rank mode that will set timer and calculate score if rank mode is selected.
+     * @param wall
+     */
     private void enableRankMode(Wall wall){
         rankMode = true;
         gameTimer = new GameTimer();
@@ -189,6 +195,9 @@ public class GameBoard extends JComponent{
         fixSpeed();
     }
 
+    /**
+     * Calculates the player's score.
+     */
     private void calculateScore(){
         score = GameScore.score;
         bonusScore = 0;
@@ -204,12 +213,20 @@ public class GameBoard extends JComponent{
         GameScore.score = score;
     }
 
+    /**
+     * In rank mode, the speed of ball is fixed.
+     */
     private void fixSpeed(){
         wall.getBall().setXSpeed(3);
         wall.getBall().setYSpeed(-3);
     }
 
 
+    /**
+     * Draws messages, bricks, ball and player on the game screen.
+     *
+     * @param g graphics
+     */
     public void paint(Graphics g){
 
         Graphics2D g2d = (Graphics2D) g;
@@ -293,7 +310,11 @@ public class GameBoard extends JComponent{
         drawPauseMenu(g2d);
     }
 
-    // show GameBoard
+    /**
+     * Shows gameboard.
+     *
+     * @param g2d graphics 2d
+     */
     private void obscureGameBoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
@@ -309,7 +330,11 @@ public class GameBoard extends JComponent{
         g2d.setColor(tmpColor);
     }
 
-    // draw Pause Menu
+    /**
+     * Draws pause menu.
+     *
+     * @param g2d graphics 2d
+     */
     private void drawPauseMenu(Graphics2D g2d){
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();

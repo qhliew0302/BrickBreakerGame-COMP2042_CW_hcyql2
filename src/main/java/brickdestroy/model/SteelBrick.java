@@ -21,7 +21,9 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-
+/**
+ * A steel brick class that inherits from the abstract brick class.
+ */
 public class SteelBrick extends Brick {
 
     private static final String NAME = "Steel Brick";
@@ -33,6 +35,12 @@ public class SteelBrick extends Brick {
     private Random rnd;
     private Shape brickFace;
 
+    /**
+     * A Steel Brick constructor that initialises the steel brick variables.
+     *
+     * @param point position of steel brick
+     * @param size size of the steel brick
+     */
     public SteelBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
@@ -40,18 +48,30 @@ public class SteelBrick extends Brick {
     }
 
 
+    /**
+     * Gets the brick shape of the brick.
+     *
+     * @return steel brick shape
+     */
     @Override
     public Shape getBrick() {
         return brickFace;
     }
 
-
+    /**
+     * Sets impact on the brick if the random value is less than 0.4.
+     */
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();
         }
     }
 
+    /**
+     * Gets a random value.
+     *
+     * @return random value
+     */
     public Random getRnd(){
         return rnd;
     }

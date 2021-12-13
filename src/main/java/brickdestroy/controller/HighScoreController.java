@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.io.*;
 import brickdestroy.view.*;
 
+/**
+ * A high score controller class that controls the high score class.
+ */
 public class HighScoreController {
 
     private String highScore1;
@@ -18,11 +21,14 @@ public class HighScoreController {
         readScores();
     }
 
+    /**
+     * Reads the top 3 high scores stored in the high score file.
+     */
     public void readScores(){
         FileReader readFile;
         BufferedReader reader = null;
         try{
-            readFile = new FileReader("src/brickdestroy/resources/highScore.txt");
+            readFile = new FileReader("src/main/java/brickdestroy/resources/highScore.txt");
             reader = new BufferedReader(readFile);
             highScore1 = reader.readLine();
             highScore2 = reader.readLine();
@@ -39,6 +45,9 @@ public class HighScoreController {
         }
     }
 
+    /**
+     * Check the score whether it is higher than the current high score.
+     */
     public void checkScore(){
         score = GameScore.score;
         if((score > convertToInt(highScore3) || score > convertToInt(highScore2))&& score < convertToInt(highScore1)) {
@@ -59,7 +68,7 @@ public class HighScoreController {
             highScore1 = name + " " + score;
         }
 
-        File scoreFile = new File("src/brickdestroy/highScore.txt");
+        File scoreFile = new File("src/main/java/brickdestroy/resources/highScore.txt");
         if(!scoreFile.exists()) {
             try {
                 scoreFile.createNewFile();
@@ -91,6 +100,12 @@ public class HighScoreController {
 
     }
 
+    /**
+     * Convert string to int
+     *
+     * @param highScore current high score with player's name
+     * @return integer form of high score
+     */
     public int convertToInt(String highScore){
         return Integer.parseInt(highScore.split(" ")[1]);
     }

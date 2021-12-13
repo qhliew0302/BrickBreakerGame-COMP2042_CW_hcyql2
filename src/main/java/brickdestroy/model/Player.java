@@ -19,7 +19,9 @@ package brickdestroy.model;
 
 import java.awt.*;
 
-
+/**
+ * A player class that is responsible to move left/right to catch the ball.
+ */
 public class Player {
 
 
@@ -37,6 +39,14 @@ public class Player {
     private int max;
 
 
+    /**
+     * A player constructor that initialises the player class variables.
+     *
+     * @param ballPoint the point of ball
+     * @param width the width of player
+     * @param height the height of player
+     * @param container the container of player
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
@@ -46,16 +56,32 @@ public class Player {
 
     }
 
-    // make the rectangular bar that holds the ball at the beginning
+    /**
+     * Makes the rectangular bar that holds the ball at the beginning.
+     *
+     * @param width width of player
+     * @param height height of player
+     * @return the rectangular bar (player)
+     */
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
 
+
+    /**
+     * Checks whether the ball touches the player.
+     *
+     * @param b ball object
+     * @return true if touches and vice versa
+     */
     public boolean impact(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
 
+    /**
+     * Moves the player.
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -64,27 +90,51 @@ public class Player {
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 
+    /**
+     * Moves the player to the left.
+     */
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * Moves the player to the right.
+     */
     public void moveRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * Stops the player.
+     */
     public void stop(){
         moveAmount = 0;
     }
 
+    /**
+     * Gets the player shape.
+     *
+     * @return player shape
+     */
     public Shape getPlayerFace(){
         return  playerFace;
     }
 
+    /**
+     * Moves the player to a particular point.
+     *
+     * @param p target point to move to
+     */
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 
+    /**
+     * Gets the move amount of the player.
+     *
+     * @return move amount of player
+     */
     public int getMoveAmount() {
         return moveAmount;
     }

@@ -24,7 +24,9 @@ import java.awt.event.ActionListener;
 import java.util.Hashtable;
 import brickdestroy.model.*;
 
-
+/**
+ * A debug panel class that draws the debug panel on the screen.
+ */
 public class DebugPanel extends JPanel {
 
     private static final Color DEF_BKG = Color.WHITE;
@@ -65,14 +67,28 @@ public class DebugPanel extends JPanel {
         this.setLayout(new GridLayout(2,2));
     }
 
-    // make button on the Debug Panel
+    /**
+     * Makes button on the Debug Panel。
+     *
+     * @param title text on the button
+     * @param e action listener
+     * @return
+     */
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
-    // make slider on the Debug Panel to manipulate the speed of ball
+    /**
+     * Makes slider on the Debug Panel to manipulate the speed of ball.
+     *
+     * @param min minimum value on the slider
+     * @param max maximum value on the slider
+     * @param e change listener
+     * @param type the type of slider (speed in x or y-direction)
+     * @return a Jslider
+     */
     private JSlider makeSlider(int min, int max, ChangeListener e, int type){
         JSlider slider = new JSlider(min,max);
         slider.setMajorTickSpacing(1);
@@ -91,6 +107,12 @@ public class DebugPanel extends JPanel {
         return slider;
     }
 
+    /**
+     * Sets the speed of ball.
+     *
+     * @param x the speed of ball in x-direction
+     * @param y the speed of ball in y-direction
+     */
     public void setValues(int x,int y){
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);

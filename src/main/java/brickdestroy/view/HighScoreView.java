@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * A high score view class that shows the high score leaderboard.
+ */
 public class HighScoreView extends JFrame implements ActionListener {
 
     private JLabel HIGHSCORE_TITLE;
@@ -19,8 +22,6 @@ public class HighScoreView extends JFrame implements ActionListener {
     private String highScore1;
     private String highScore2;
     private String highScore3;
-
-    private int highScore;
 
 
     public HighScoreView(){
@@ -53,11 +54,14 @@ public class HighScoreView extends JFrame implements ActionListener {
         this.setLocation(x,y);
     }
 
+    /**
+     * Reads the top 3 high scores from the high score file.
+     */
     public void readScores(){
         FileReader readFile;
         BufferedReader reader = null;
         try{
-            readFile = new FileReader("src/brickdestroy/resources/highScore.txt");
+            readFile = new FileReader("src/main/java/brickdestroy/resources/highScore.txt");
             reader = new BufferedReader(readFile);
             highScore1 = reader.readLine();
             highScore2 = reader.readLine();
@@ -75,6 +79,9 @@ public class HighScoreView extends JFrame implements ActionListener {
     }
 
 
+    /**
+     * Shows the leaderboard title.
+     */
     private void showHSTitle(){
 
         HIGHSCORE_TITLE = new JLabel();
@@ -89,7 +96,9 @@ public class HighScoreView extends JFrame implements ActionListener {
     }
 
 
-
+    /**
+     * Shows the top 3 high score on the frame.
+     */
     private void drawScore(){
 
         SCORE_TEXT = new JLabel();
@@ -106,6 +115,9 @@ public class HighScoreView extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Draws the back button.
+     */
     private void drawButton(){
         backButton = new JButton("Back");
         backButton.setBounds(250,350,100, 40);
@@ -116,6 +128,11 @@ public class HighScoreView extends JFrame implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    /**
+     * If the back button is clicked, the current frame is disposed
+     * and new game frame will be prompted (home menu shows up).
+     * @param event
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == backButton){

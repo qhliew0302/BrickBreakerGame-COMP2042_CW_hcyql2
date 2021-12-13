@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import brickdestroy.controller.*;
 
-
+/**
+ * A home menu class that shows the home menu of the game.
+ */
 public class HomeMenu extends JComponent {
 
     private static final String GREETINGS = "Welcome to:";
@@ -112,6 +114,11 @@ public class HomeMenu extends JComponent {
     }
 
 
+    /**
+     * Draws the texts and buttons on the home menu.
+     *
+     * @param g2d graphics 2d
+     */
     public void drawMenu(Graphics2D g2d){
 
         drawContainer(g2d);
@@ -139,9 +146,16 @@ public class HomeMenu extends JComponent {
         g2d.setColor(prevColor);
     }
 
+    /**
+     * The background of homeMenu is an image.
+     * If the image file could not be read,
+     * the home menu will show its initial background.
+     *
+     * @param g2d graphics 2d
+     */
     private void drawContainer(Graphics2D g2d) {
         try{
-            backgroundImage =ImageIO.read(new File("src/brickdestroy/resources/Background.jpg"));
+            backgroundImage =ImageIO.read(new File("src/main/java/brickdestroy/resources/Background.jpg"));
             g2d.drawImage(backgroundImage, 0,0,450,300,null);
         }catch(IOException ex){
             Color prev = g2d.getColor();
@@ -166,6 +180,11 @@ public class HomeMenu extends JComponent {
 
     }
 
+    /**
+     * Draws the greeting, title and credit texts on the home menu.
+     *
+     * @param g2d graphics 2d
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -199,6 +218,11 @@ public class HomeMenu extends JComponent {
 
     }
 
+    /**
+     * Draws the buttons on the home menu.
+     *
+     * @param g2d graphics 2d
+     */
     private void drawButton(Graphics2D g2d){
 
         FontRenderContext frc = g2d.getFontRenderContext();
@@ -240,6 +264,18 @@ public class HomeMenu extends JComponent {
     }
 
     // create a setPosition method to remove duplicate codes when setting positions of the buttons
+
+    /**
+     * Sets the position of the buttons.
+     *
+     * @param g2d graphics 2d
+     * @param button type of button
+     * @param textRectangle rectangle text of button
+     * @param buttonClicked button is clicked
+     * @param text the text on the button
+     * @param x the x-position of the button
+     * @param y the y-position of the button
+     */
     public void setPosition(Graphics2D g2d, Rectangle button, Rectangle2D textRectangle, boolean buttonClicked, String text, int x, int y){
         button.setLocation(x, y);
         x = (int)(button.getWidth() - textRectangle.getWidth()) / 2;
