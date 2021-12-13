@@ -50,7 +50,7 @@ public class HighScoreController {
      */
     public void checkScore(){
         score = GameScore.score;
-        if((score > convertToInt(highScore3) || score > convertToInt(highScore2))&& score < convertToInt(highScore1)) {
+        if((score > convertToInt(highScore3) || score > convertToInt(highScore2))&& score <= convertToInt(highScore1)) {
             String name = JOptionPane.showInputDialog("You make into Top 3! Please enter you name");
             name = name.replace(" ", "");
             if (score > convertToInt(highScore2)) {
