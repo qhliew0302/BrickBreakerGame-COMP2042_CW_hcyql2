@@ -4,6 +4,9 @@ import java.text.DecimalFormat;
 import java.util.TimerTask;
 import java.util.Timer;
 
+/**
+ * A game timer class that makes a countdown timer in rank mode.
+ */
 public class GameTimer {
 
     private int minute;
@@ -18,6 +21,9 @@ public class GameTimer {
 
     private DecimalFormat dFormat;
 
+    /**
+     * A game timer constructor that counts down the time if the game is running in every second.
+     */
     public GameTimer() {
         second = 0;
         minute = 5;
@@ -65,10 +71,20 @@ public class GameTimer {
         this.second = second;
     }
 
+    /**
+     * Gets the second in decimal format.
+     *
+     * @return second in decimal format
+     */
     public String getDdSecond() {
         return ddSecond;
     }
 
+    /**
+     * Gets the minute in decimal format.
+     *
+     * @return minute in decimal format
+     */
     public String getDdMinute() {
         return ddMinute;
     }
@@ -77,10 +93,17 @@ public class GameTimer {
         this.gameStatus = gameStatus;
     }
 
+    /**
+     * Gets the game status. (either is gaming or not)
+     * @return
+     */
     public boolean getGameStatus(){
         return gameStatus;
     }
 
+    /**
+     * Resets the timer to 5 minutes.
+     */
     public void resetTimer(){
         second = 0;
         minute = 5;

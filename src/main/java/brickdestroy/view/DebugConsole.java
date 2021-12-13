@@ -22,7 +22,9 @@ import java.awt.*;
 import brickdestroy.model.*;
 import brickdestroy.controller.*;
 
-
+/**
+ * A debug console class that sets the location of the debug console panel.
+ */
 public class DebugConsole extends JDialog{
 
     private static final String TITLE = "Debug Console";
@@ -60,7 +62,9 @@ public class DebugConsole extends JDialog{
         this.setFocusable(true);
     }
 
-    // the location of the debug console is set to be at the centre of the frame
+    /**
+     * Sets the location of the debug console at the centre of the frame.
+     */
     public void setLocation(){
         int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
         int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();

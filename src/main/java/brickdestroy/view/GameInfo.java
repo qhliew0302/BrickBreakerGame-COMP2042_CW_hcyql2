@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import brickdestroy.controller.*;
 
+/**
+ * A game info class that shows the instructions on how to play the game.
+ */
 public class GameInfo extends JFrame{
 
     private JLabel INFO_TITLE;
@@ -38,6 +41,9 @@ public class GameInfo extends JFrame{
         this.add(backButton);
     }
 
+    /**
+     * Sets the location of the frame at the center of the screen.
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
@@ -45,6 +51,9 @@ public class GameInfo extends JFrame{
         this.setLocation(x,y);
     }
 
+    /**
+     * Draws the info title.
+     */
     private void showInfoTitle(){
 
         INFO_TITLE = new JLabel();
@@ -59,7 +68,9 @@ public class GameInfo extends JFrame{
     }
 
 
-
+    /**
+     * Draws the info content.
+     */
     private void showInfoText(){
 
         INFO_TEXT = new JLabel();
@@ -87,6 +98,9 @@ public class GameInfo extends JFrame{
 
     }
 
+    /**
+     * Draws the back button.
+     */
     private void drawButton(){
         backButton = new JButton("Back");
         backButton.setBounds(250,350,100, 40);

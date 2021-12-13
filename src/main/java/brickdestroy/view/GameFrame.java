@@ -23,7 +23,9 @@ import javax.swing.*;
 import java.awt.*;
 import brickdestroy.controller.*;
 
-
+/**
+ * A game frame class that holds the home menu and game board.
+ */
 public class GameFrame extends JFrame {
 
     private static final String DEF_TITLE = "Brick Destroy";
@@ -34,6 +36,9 @@ public class GameFrame extends JFrame {
     private GameFrameController gameFrameController;
 
 
+    /**
+     * A game frame constructor that shows the home menu screen whenever the game is initiated.
+     */
     public GameFrame(){
         super();
 
@@ -56,7 +61,11 @@ public class GameFrame extends JFrame {
     }
 
 
-
+    /**
+     * Shows the game board on the screen.
+     *
+     * @param gameType type of game (normal/rank)
+     */
     public void enableGameBoard(String gameType){
         GameFrameController gameFrameController = new GameFrameController(this);
         this.gameFrameController = gameFrameController;
@@ -77,7 +86,9 @@ public class GameFrame extends JFrame {
         this.addWindowFocusListener(gameFrameController);
     }
 
-
+    /**
+     * Locates the frame at the centre.
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
